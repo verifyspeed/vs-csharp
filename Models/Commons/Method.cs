@@ -1,4 +1,4 @@
-﻿namespace VSCSharp.Models.Results;
+﻿namespace VSCSharp.Models.Commons;
 
 public record Method
 {

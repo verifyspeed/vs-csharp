@@ -1,3 +1,5 @@
+using VSCSharp.Models.Commons;
+
 namespace VSCSharp.Models.Results;
 
 public record InitializationResult
