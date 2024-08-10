@@ -17,7 +17,7 @@ public class VerifySpeedClient : IVerifySpeedClient
 	}
 
 	/// <summary>
-	///   Initializes the verification process
+	/// Initializes the verification process
 	/// </summary>
 	/// <returns><see cref="Initialization"/></returns>
 	/// <exception cref="FailedInitializationException">Thrown when the initialization fails</exception>
@@ -52,6 +52,14 @@ public class VerifySpeedClient : IVerifySpeedClient
 		}
 	}
 
+	/// <summary>
+	/// Creates a verification
+	/// </summary>
+	/// <param name="methodName">The method name to use for verification</param>
+	/// <param name="clientIpAddress">The client's IP address</param>
+	/// <param name="verificationType">The type of verification to create</param>
+	/// <returns></returns>
+	/// <exception cref="FailedCreateVerificationException"></exception>
 	public async Task<CreatedVerification> CreateVerificationAsync(
 		string methodName,
 		string clientIpAddress,
@@ -103,7 +111,13 @@ public class VerifySpeedClient : IVerifySpeedClient
 			);
 		}
 	}
-	
+
+	/// <summary>
+	/// Verifies the token and returns the result
+	/// </summary>
+	/// <param name="token">The token to verify </param>
+	/// <returns><see cref="VerificationResult"/></returns>
+	/// <exception cref="FailedVerifyingTokenException"></exception>
 	public async Task<VerificationResult> VerifyTokenAsync(string token)
 	{
 		httpClient.DefaultRequestHeaders.Add(name: "token", token);
