@@ -1,13 +1,13 @@
 ﻿using VSCSharp.Enums;
-using VSCSharp.Models.Results;
+using VSCSharp.Models.Commons;
 
 namespace VSCSharp.Clients;
 
 public interface IVerifySpeedClient
 {
-	Task<InitializationResult> InitializeAsync();
+	Task<Initialization> InitializeAsync();
 
-	Task<CreateVerificationResult> CreateVerificationAsync(
+	Task<CreatedVerification> CreateVerificationAsync(
 		string methodName,
 		string clientIpAddress,
 		VerificationType verificationType

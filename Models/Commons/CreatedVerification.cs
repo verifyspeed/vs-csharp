@@ -1,6 +1,6 @@
-namespace VSCSharp.Models.Results;
+namespace VSCSharp.Models.Commons;
 
-public record CreateVerificationResult
+public record CreatedVerification
 {
 	public string VerificationKey { get; set; } = null!;
 	public string? DeepLink { get; set; }

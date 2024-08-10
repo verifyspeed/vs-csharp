@@ -3,7 +3,7 @@ using System.Text;
 using System.Text.Json;
 using VSCSharp.Enums;
 using VSCSharp.Exceptions;
-using VSCSharp.Models.Results;
+using VSCSharp.Models.Commons;
 
 namespace VSCSharp.Clients;
 
@@ -19,9 +19,9 @@ public class VerifySpeedClient : IVerifySpeedClient
 	/// <summary>
 	///   Initializes the verification process
 	/// </summary>
-	/// <returns><see cref="InitializationResult"/></returns>
+	/// <returns><see cref="Initialization"/></returns>
 	/// <exception cref="FailedInitializationException">Thrown when the initialization fails</exception>
-	public async Task<InitializationResult> InitializeAsync()
+	public async Task<Initialization> InitializeAsync()
 	{
 		HttpResponseMessage response = await httpClient.GetAsync("v1/verifications/initialize");
 
@@ -34,7 +34,7 @@ public class VerifySpeedClient : IVerifySpeedClient
 
 		try
 		{
-			var result = JsonSerializer.Deserialize<InitializationResult>(content);
+			var result = JsonSerializer.Deserialize<Initialization>(content);
 
 			if (result is null)
 			{
@@ -52,7 +52,7 @@ public class VerifySpeedClient : IVerifySpeedClient
 		}
 	}
 
-	public async Task<CreateVerificationResult> CreateVerificationAsync(
+	public async Task<CreatedVerification> CreateVerificationAsync(
 		string methodName,
 		string clientIpAddress,
 		VerificationType verificationType
@@ -86,7 +86,7 @@ public class VerifySpeedClient : IVerifySpeedClient
 
 		try
 		{
-			var result = JsonSerializer.Deserialize<CreateVerificationResult>(content);
+			var result = JsonSerializer.Deserialize<CreatedVerification>(content);
 
 			if (result is null)
 			{
