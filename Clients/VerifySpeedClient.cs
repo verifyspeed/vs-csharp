@@ -103,4 +103,36 @@ public class VerifySpeedClient : IVerifySpeedClient
 			);
 		}
 	}
+	
+	public async Task<VerificationResult> VerifyTokenAsync(string token)
+	{
+		httpClient.DefaultRequestHeaders.Add(name: "token", token);
+		HttpResponseMessage response = await httpClient.GetAsync("v1/verifications/result");
+
+		if (!response.IsSuccessStatusCode)
+		{
+			throw new FailedVerifyingTokenException($"Failed to verify token, reason: {response.ReasonPhrase}");
+		}
+
+		string content = await response.Content.ReadAsStringAsync();
+
+		try
+		{
+			var result = JsonSerializer.Deserialize<VerificationResult>(content);
+
+			if (result is null)
+			{
+				throw new FailedVerifyingTokenException(message: "response content is null");
+			}
+
+			return result;
+		}
+		catch (JsonException exception)
+		{
+			throw new FailedVerifyingTokenException(
+				message: "Failed to deserialize the verification result response content",
+				exception
+			);
+		}
+	}
 }

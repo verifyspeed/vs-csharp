@@ -12,4 +12,6 @@ public interface IVerifySpeedClient
 		string clientIpAddress,
 		VerificationType verificationType
 	);
+	
+	Task<VerificationResult> VerifyTokenAsync(string token);
 }
