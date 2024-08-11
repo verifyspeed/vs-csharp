@@ -1,12 +1,13 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace VSCSharp.Models.Commons;
-
-public record Method
+namespace VSCSharp.Models.Commons
 {
-	[JsonPropertyName("methodName")]
-	public string MethodName { get; set; } = null!;
+	public record Method
+	{
+		[JsonPropertyName("methodName")]
+		public string MethodName { get; set; } = null!;
 
-	[JsonPropertyName("displayName")]
-	public string DisplayName { get; set; } = null!;
+		[JsonPropertyName("displayName")]
+		public string DisplayName { get; set; } = null!;
+	}
 }

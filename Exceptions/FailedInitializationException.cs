@@ -1,7 +1,10 @@
-﻿namespace VSCSharp.Exceptions;
+﻿using System;
 
-public class FailedInitializationException : Exception
+namespace VSCSharp.Exceptions
 {
-	public FailedInitializationException(string message) : base(message) { }
-	public FailedInitializationException(string message, Exception exception) : base(message, exception) { }
+	public class FailedInitializationException : Exception
+	{
+		public FailedInitializationException(string message) : base(message) { }
+		public FailedInitializationException(string message, Exception exception) : base(message, exception) { }
+	}
 }

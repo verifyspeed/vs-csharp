@@ -1,7 +1,10 @@
-namespace VSCSharp.Exceptions;
+using System;
 
-public class FailedCreateVerificationException : Exception
+namespace VSCSharp.Exceptions
 {
-	public FailedCreateVerificationException(string message) : base(message) { }
-	public FailedCreateVerificationException(string message, Exception exception) : base(message, exception) { }
+	public class FailedCreateVerificationException : Exception
+	{
+		public FailedCreateVerificationException(string message) : base(message) { }
+		public FailedCreateVerificationException(string message, Exception exception) : base(message, exception) { }
+	}
 }

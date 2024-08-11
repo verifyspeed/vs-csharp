@@ -1,7 +1,10 @@
-namespace VSCSharp.Exceptions;
+using System;
 
-public class FailedVerifyingTokenException : Exception
+namespace VSCSharp.Exceptions
 {
-	public FailedVerifyingTokenException(string message) : base(message) { }
-	public FailedVerifyingTokenException(string message, Exception exception) : base(message, exception) { }
+	public class FailedVerifyingTokenException : Exception
+	{
+		public FailedVerifyingTokenException(string message) : base(message) { }
+		public FailedVerifyingTokenException(string message, Exception exception) : base(message, exception) { }
+	}
 }

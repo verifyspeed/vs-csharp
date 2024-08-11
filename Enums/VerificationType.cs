@@ -1,7 +1,8 @@
-namespace VSCSharp.Enums;
-
-public enum VerificationType
+namespace VSCSharp.Enums
 {
-	DeepLink,
-	QrCode
+	public enum VerificationType
+	{
+		DeepLink,
+		QrCode
+	}
 }

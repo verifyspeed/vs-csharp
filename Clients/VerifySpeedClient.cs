@@ -1,32 +1,34 @@
+using System.Net.Http;
 using System.Net.Mime;
 using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 using VSCSharp.Enums;
 using VSCSharp.Exceptions;
 using VSCSharp.Models.Commons;
 
-namespace VSCSharp.Clients;
-
-public class VerifySpeedClient : IVerifySpeedClient
+namespace VSCSharp.Clients
 {
-	private readonly HttpClient httpClient;
-
-	private static readonly JsonSerializerOptions JsonSerializerOptions = new()
+	public class VerifySpeedClient : IVerifySpeedClient
 	{
-		PropertyNameCaseInsensitive = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-	};
+		private readonly HttpClient httpClient;
 
-	public VerifySpeedClient(HttpClient httpClient)
+		private static readonly JsonSerializerOptions JsonSerializerOptions = new()
+		{
+			PropertyNameCaseInsensitive = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+		};
+
+		public VerifySpeedClient(HttpClient httpClient)
 	{
 		this.httpClient = httpClient;
 	}
 
-	/// <summary>
-	/// Initializes the verification process
-	/// </summary>
-	/// <returns><see cref="Initialization"/></returns>
-	/// <exception cref="FailedInitializationException">Thrown when the initialization fails</exception>
-	public async Task<Initialization> InitializeAsync()
+		/// <summary>
+		/// Initializes the verification process
+		/// </summary>
+		/// <returns><see cref="Initialization"/></returns>
+		/// <exception cref="FailedInitializationException">Thrown when the initialization fails</exception>
+		public async Task<Initialization> InitializeAsync()
 	{
 		HttpResponseMessage response = await httpClient.GetAsync("v1/verifications/initialize");
 
@@ -57,19 +59,19 @@ public class VerifySpeedClient : IVerifySpeedClient
 		}
 	}
 
-	/// <summary>
-	/// Creates a verification
-	/// </summary>
-	/// <param name="methodName">The method name to use for verification</param>
-	/// <param name="clientIpAddress">The client's IP address</param>
-	/// <param name="verificationType">The type of verification to create</param>
-	/// <returns></returns>
-	/// <exception cref="FailedCreateVerificationException"></exception>
-	public async Task<CreatedVerification> CreateVerificationAsync(
-		string methodName,
-		string clientIpAddress,
-		VerificationType verificationType
-	)
+		/// <summary>
+		/// Creates a verification
+		/// </summary>
+		/// <param name="methodName">The method name to use for verification</param>
+		/// <param name="clientIpAddress">The client's IP address</param>
+		/// <param name="verificationType">The type of verification to create</param>
+		/// <returns></returns>
+		/// <exception cref="FailedCreateVerificationException"></exception>
+		public async Task<CreatedVerification> CreateVerificationAsync(
+			string methodName,
+			string clientIpAddress,
+			VerificationType verificationType
+		)
 	{
 		HttpResponseMessage response = await httpClient.PostAsync(
 			requestUri: "v1/verifications/create",
@@ -118,13 +120,13 @@ public class VerifySpeedClient : IVerifySpeedClient
 		}
 	}
 
-	/// <summary>
-	/// Verifies the token and returns the result
-	/// </summary>
-	/// <param name="token">The token to verify </param>
-	/// <returns><see cref="VerificationResult"/></returns>
-	/// <exception cref="FailedVerifyingTokenException"></exception>
-	public async Task<VerificationResult> VerifyTokenAsync(string token)
+		/// <summary>
+		/// Verifies the token and returns the result
+		/// </summary>
+		/// <param name="token">The token to verify </param>
+		/// <returns><see cref="VerificationResult"/></returns>
+		/// <exception cref="FailedVerifyingTokenException"></exception>
+		public async Task<VerificationResult> VerifyTokenAsync(string token)
 	{
 		httpClient.DefaultRequestHeaders.Add(name: "token", token);
 		HttpResponseMessage response = await httpClient.GetAsync("v1/verifications/result");
@@ -154,5 +156,6 @@ public class VerifySpeedClient : IVerifySpeedClient
 				exception
 			);
 		}
+	}
 	}
 }

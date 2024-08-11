@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace VSCSharp.Models.Commons;
-
-public record Initialization
+namespace VSCSharp.Models.Commons
 {
-	[JsonPropertyName("availableMethods")]
-	public List<Method> AvailableMethods { get; set; } = new();
+	public record Initialization
+	{
+		[JsonPropertyName("availableMethods")]
+		public List<Method> AvailableMethods { get; set; } = new();
+	}
 }
