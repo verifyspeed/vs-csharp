@@ -11,6 +11,11 @@ public class VerifySpeedClient : IVerifySpeedClient
 {
 	private readonly HttpClient httpClient;
 
+	private static readonly JsonSerializerOptions JsonSerializerOptions = new()
+	{
+		PropertyNameCaseInsensitive = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+	};
+
 	public VerifySpeedClient(HttpClient httpClient)
 	{
 		this.httpClient = httpClient;
@@ -34,7 +39,7 @@ public class VerifySpeedClient : IVerifySpeedClient
 
 		try
 		{
-			var result = JsonSerializer.Deserialize<Initialization>(content);
+			var result = JsonSerializer.Deserialize<Initialization>(content, JsonSerializerOptions);
 
 			if (result is null)
 			{
@@ -76,7 +81,8 @@ public class VerifySpeedClient : IVerifySpeedClient
 						clientIpAddress,
 						deepLink = verificationType == VerificationType.DeepLink,
 						qrCode = verificationType == VerificationType.QrCode
-					}
+					},
+					JsonSerializerOptions
 				),
 				Encoding.UTF8,
 				MediaTypeNames.Application.Json
@@ -94,7 +100,7 @@ public class VerifySpeedClient : IVerifySpeedClient
 
 		try
 		{
-			var result = JsonSerializer.Deserialize<CreatedVerification>(content);
+			var result = JsonSerializer.Deserialize<CreatedVerification>(content, JsonSerializerOptions);
 
 			if (result is null)
 			{
@@ -132,7 +138,7 @@ public class VerifySpeedClient : IVerifySpeedClient
 
 		try
 		{
-			var result = JsonSerializer.Deserialize<VerificationResult>(content);
+			var result = JsonSerializer.Deserialize<VerificationResult>(content, JsonSerializerOptions);
 
 			if (result is null)
 			{
