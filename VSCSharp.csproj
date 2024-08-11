@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PackageId>VerifySpeed.VSCSharp</PackageId>
-        <Version>0.0.1</Version>
+        <Version>0.1.3</Version>
         <Title>VSCSharp</Title>
         <Authors>RekarPC98</Authors>
         <Description>Integration SDK for VerifySpeed API</Description>
