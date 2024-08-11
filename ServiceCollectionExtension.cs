@@ -10,7 +10,7 @@ namespace VSCSharp
 	{
 		public static IServiceCollection AddVerifySpeed(this IServiceCollection services, string serverKey)
 		{
-			services.TryAddSingleton<IVerifySpeedClient>(
+			services.AddScoped<IVerifySpeedClient>(
 				_ =>
 				{
 					var httpClient = new HttpClient { BaseAddress = new Uri("https://api.verifyspeed.com") };
