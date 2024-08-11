@@ -19,9 +19,9 @@ namespace VSCSharp.Clients
 		};
 
 		public VerifySpeedClient(HttpClient httpClient)
-	{
-		this.httpClient = httpClient;
-	}
+		{
+			this.httpClient = httpClient;
+		}
 
 		/// <summary>
 		/// Initializes the verification process
@@ -29,35 +29,35 @@ namespace VSCSharp.Clients
 		/// <returns><see cref="Initialization"/></returns>
 		/// <exception cref="FailedInitializationException">Thrown when the initialization fails</exception>
 		public async Task<Initialization> InitializeAsync()
-	{
-		HttpResponseMessage response = await httpClient.GetAsync("v1/verifications/initialize");
-
-		if (!response.IsSuccessStatusCode)
 		{
-			throw new FailedInitializationException($"Failed to initialize, reason: {response.ReasonPhrase}");
-		}
+			HttpResponseMessage response = await httpClient.GetAsync("v1/verifications/initialize");
 
-		string content = await response.Content.ReadAsStringAsync();
-
-		try
-		{
-			var result = JsonSerializer.Deserialize<Initialization>(content, JsonSerializerOptions);
-
-			if (result is null)
+			if (!response.IsSuccessStatusCode)
 			{
-				throw new FailedInitializationException(message: "response content is null");
+				throw new FailedInitializationException($"Failed to initialize, reason: {response.ReasonPhrase}");
 			}
 
-			return result;
+			string content = await response.Content.ReadAsStringAsync();
+
+			try
+			{
+				var result = JsonSerializer.Deserialize<Initialization>(content, JsonSerializerOptions);
+
+				if (result is null)
+				{
+					throw new FailedInitializationException(message: "response content is null");
+				}
+
+				return result;
+			}
+			catch (JsonException exception)
+			{
+				throw new FailedInitializationException(
+					message: "Failed to deserialize the initialization response content",
+					exception
+				);
+			}
 		}
-		catch (JsonException exception)
-		{
-			throw new FailedInitializationException(
-				message: "Failed to deserialize the initialization response content",
-				exception
-			);
-		}
-	}
 
 		/// <summary>
 		/// Creates a verification
@@ -72,53 +72,53 @@ namespace VSCSharp.Clients
 			string clientIpAddress,
 			VerificationType verificationType
 		)
-	{
-		HttpResponseMessage response = await httpClient.PostAsync(
-			requestUri: "v1/verifications/create",
-			new StringContent(
-				JsonSerializer.Serialize(
-					new
-					{
-						methodName,
-						clientIpAddress,
-						deepLink = verificationType == VerificationType.DeepLink,
-						qrCode = verificationType == VerificationType.QrCode
-					},
-					JsonSerializerOptions
-				),
-				Encoding.UTF8,
-				MediaTypeNames.Application.Json
-			)
-		);
-
-		if (!response.IsSuccessStatusCode)
 		{
-			throw new FailedCreateVerificationException(
-				$"Failed to create verification, reason: {response.ReasonPhrase}"
+			HttpResponseMessage response = await httpClient.PostAsync(
+				requestUri: "v1/verifications/create",
+				new StringContent(
+					JsonSerializer.Serialize(
+						new
+						{
+							methodName,
+							clientIpAddress,
+							deepLink = verificationType == VerificationType.DeepLink,
+							qrCode = verificationType == VerificationType.QrCode
+						},
+						JsonSerializerOptions
+					),
+					Encoding.UTF8,
+					MediaTypeNames.Application.Json
+				)
 			);
-		}
 
-		string content = await response.Content.ReadAsStringAsync();
-
-		try
-		{
-			var result = JsonSerializer.Deserialize<CreatedVerification>(content, JsonSerializerOptions);
-
-			if (result is null)
+			if (!response.IsSuccessStatusCode)
 			{
-				throw new FailedCreateVerificationException(message: "response content is null");
+				throw new FailedCreateVerificationException(
+					$"Failed to create verification, reason: {response.ReasonPhrase}"
+				);
 			}
 
-			return result;
+			string content = await response.Content.ReadAsStringAsync();
+
+			try
+			{
+				var result = JsonSerializer.Deserialize<CreatedVerification>(content, JsonSerializerOptions);
+
+				if (result is null)
+				{
+					throw new FailedCreateVerificationException(message: "response content is null");
+				}
+
+				return result;
+			}
+			catch (JsonException exception)
+			{
+				throw new FailedCreateVerificationException(
+					message: "Failed to deserialize the create verification response content",
+					exception
+				);
+			}
 		}
-		catch (JsonException exception)
-		{
-			throw new FailedCreateVerificationException(
-				message: "Failed to deserialize the create verification response content",
-				exception
-			);
-		}
-	}
 
 		/// <summary>
 		/// Verifies the token and returns the result
@@ -127,35 +127,35 @@ namespace VSCSharp.Clients
 		/// <returns><see cref="VerificationResult"/></returns>
 		/// <exception cref="FailedVerifyingTokenException"></exception>
 		public async Task<VerificationResult> VerifyTokenAsync(string token)
-	{
-		httpClient.DefaultRequestHeaders.Add(name: "token", token);
-		HttpResponseMessage response = await httpClient.GetAsync("v1/verifications/result");
-
-		if (!response.IsSuccessStatusCode)
 		{
-			throw new FailedVerifyingTokenException($"Failed to verify token, reason: {response.ReasonPhrase}");
-		}
+			httpClient.DefaultRequestHeaders.Add(name: "token", token);
+			HttpResponseMessage response = await httpClient.GetAsync("v1/verifications/result");
 
-		string content = await response.Content.ReadAsStringAsync();
-
-		try
-		{
-			var result = JsonSerializer.Deserialize<VerificationResult>(content, JsonSerializerOptions);
-
-			if (result is null)
+			if (!response.IsSuccessStatusCode)
 			{
-				throw new FailedVerifyingTokenException(message: "response content is null");
+				throw new FailedVerifyingTokenException($"Failed to verify token, reason: {response.ReasonPhrase}");
 			}
 
-			return result;
+			string content = await response.Content.ReadAsStringAsync();
+
+			try
+			{
+				var result = JsonSerializer.Deserialize<VerificationResult>(content, JsonSerializerOptions);
+
+				if (result is null)
+				{
+					throw new FailedVerifyingTokenException(message: "response content is null");
+				}
+
+				return result;
+			}
+			catch (JsonException exception)
+			{
+				throw new FailedVerifyingTokenException(
+					message: "Failed to deserialize the verification result response content",
+					exception
+				);
+			}
 		}
-		catch (JsonException exception)
-		{
-			throw new FailedVerifyingTokenException(
-				message: "Failed to deserialize the verification result response content",
-				exception
-			);
-		}
-	}
 	}
 }
