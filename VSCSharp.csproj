@@ -7,8 +7,8 @@
         <Title>VSCSharp</Title>
         <Authors>RekarPC98</Authors>
         <Description>Integration SDK for VerifySpeed API</Description>
-<!--        <PackageProjectUrl></PackageProjectUrl>-->
-<!--        <RepositoryUrl></RepositoryUrl>-->
+        <PackageProjectUrl>https://github.com/verifyspeed/vs-csharp</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/verifyspeed/vs-csharp</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
