@@ -28,8 +28,9 @@ namespace VSCSharp.Clients
 		/// </summary>
 		/// <returns><see cref="Initialization"/></returns>
 		/// <exception cref="FailedInitializationException">Thrown when the initialization fails</exception>
-		public async Task<Initialization> InitializeAsync()
+		public async Task<Initialization> InitializeAsync(string clientIpAddress)
 		{
+			httpClient.DefaultRequestHeaders.Add(name: "client-ip-address", clientIpAddress);
 			HttpResponseMessage response = await httpClient.GetAsync("v1/verifications/initialize");
 
 			if (!response.IsSuccessStatusCode)

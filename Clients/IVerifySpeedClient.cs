@@ -6,7 +6,7 @@ namespace VSCSharp.Clients
 {
 	public interface IVerifySpeedClient
 	{
-		Task<Initialization> InitializeAsync();
+		Task<Initialization> InitializeAsync(string clientIpAddress);
 
 		Task<CreatedVerification> CreateVerificationAsync(
 			string methodName,
