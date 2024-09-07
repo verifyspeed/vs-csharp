@@ -16,3 +16,5 @@
     </ItemGroup>
 
 </Project>
+
+<!-- dotnet pack -c Release -o C:\dev\nuget -->
