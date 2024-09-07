@@ -74,14 +74,15 @@ namespace VSCSharp.Clients
 			VerificationType verificationType
 		)
 		{
+			
+			httpClient.DefaultRequestHeaders.Add(name: "client-ip-address", clientIpAddress);
 			HttpResponseMessage response = await httpClient.PostAsync(
 				requestUri: "v1/verifications/create",
 				new StringContent(
 					JsonSerializer.Serialize(
 						new
 						{
-							methodName,
-							clientIpAddress,
+							methodName = methodName,
 							deepLink = verificationType == VerificationType.DeepLink,
 							qrCode = verificationType == VerificationType.QrCode
 						},
