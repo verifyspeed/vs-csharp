@@ -3,6 +3,7 @@ using System.Net.Mime;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using VSCSharp.Constants;
 using VSCSharp.Enums;
 using VSCSharp.Exceptions;
 using VSCSharp.Models.Commons;
@@ -28,9 +29,9 @@ namespace VSCSharp.Clients
 		/// </summary>
 		/// <returns><see cref="Initialization"/></returns>
 		/// <exception cref="FailedInitializationException">Thrown when the initialization fails</exception>
-		public async Task<Initialization> InitializeAsync(string clientIpAddress)
+		public async Task<Initialization> InitializeAsync(string clientIPv4Address)
 		{
-			httpClient.DefaultRequestHeaders.Add(name: "client-ip-address", clientIpAddress);
+			httpClient.DefaultRequestHeaders.Add(name: LibraryConstants.ClientIPv4AddressHeaderName, clientIPv4Address);
 			HttpResponseMessage response = await httpClient.GetAsync("v1/verifications/initialize");
 
 			if (!response.IsSuccessStatusCode)
@@ -64,18 +65,18 @@ namespace VSCSharp.Clients
 		/// Creates a verification
 		/// </summary>
 		/// <param name="methodName">The method name to use for verification</param>
-		/// <param name="clientIpAddress">The client's IP address</param>
+		/// <param name="clientIPv4Address">The client's IP address</param>
 		/// <param name="verificationType">The type of verification to create</param>
 		/// <returns></returns>
 		/// <exception cref="FailedCreateVerificationException"></exception>
 		public async Task<CreatedVerification> CreateVerificationAsync(
 			string methodName,
-			string clientIpAddress,
+			string clientIPv4Address,
 			VerificationType verificationType
 		)
 		{
-			
-			httpClient.DefaultRequestHeaders.Add(name: "client-ip-address", clientIpAddress);
+			httpClient.DefaultRequestHeaders.Add(name: LibraryConstants.ClientIPv4AddressHeaderName, clientIPv4Address);
+
 			HttpResponseMessage response = await httpClient.PostAsync(
 				requestUri: "v1/verifications/create",
 				new StringContent(
