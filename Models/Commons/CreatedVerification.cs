@@ -4,6 +4,9 @@ namespace VSCSharp.Models.Commons
 {
 	public record CreatedVerification
 	{
+		[JsonPropertyName("MethodName")]
+		public string MethodName { get; set; } = null!;
+		
 		[JsonPropertyName("verificationKey")]
 		public string VerificationKey { get; set; } = null!;
 

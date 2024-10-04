@@ -1,3 +1,5 @@
+using System;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Mime;
 using System.Text;
@@ -67,16 +69,19 @@ namespace VSCSharp.Clients
 		/// <param name="methodName">The method name to use for verification</param>
 		/// <param name="clientIPv4Address">The client's IP address</param>
 		/// <param name="verificationType">The type of verification to create</param>
+		/// <param name="phoneNumber">Phone number to send otp to if verification type is OTP</param>
 		/// <returns></returns>
 		/// <exception cref="FailedCreateVerificationException"></exception>
 		public async Task<CreatedVerification> CreateVerificationAsync(
 			string methodName,
 			string clientIPv4Address,
-			VerificationType verificationType
+			VerificationType verificationType,
+			string phoneNumber = null
 		)
 		{
 			httpClient.DefaultRequestHeaders.Add(name: LibraryConstants.ClientIPv4AddressHeaderName, clientIPv4Address);
-
+			string verificationTypeValue = GetVerificationTypeValue(verificationType);
+			
 			HttpResponseMessage response = await httpClient.PostAsync(
 				requestUri: "v1/verifications/create",
 				new StringContent(
@@ -84,8 +89,8 @@ namespace VSCSharp.Clients
 						new
 						{
 							methodName = methodName,
-							deepLink = verificationType == VerificationType.DeepLink,
-							qrCode = verificationType == VerificationType.QrCode
+							verificationType = verificationTypeValue,
+							phoneNumber = phoneNumber
 						},
 						JsonSerializerOptions
 					),
@@ -121,6 +126,19 @@ namespace VSCSharp.Clients
 					exception
 				);
 			}
+		}
+
+		private static string GetVerificationTypeValue(VerificationType verificationType)
+		{
+			string verificationTypeValue = verificationType switch
+			{
+				VerificationType.DeepLink => VerificationTypeValues.DeepLink,
+				VerificationType.QRCode => VerificationTypeValues.QRCode,
+				VerificationType.OTP => VerificationTypeValues.OTP,
+				_ => throw new ArgumentOutOfRangeException(nameof(verificationType), verificationType, message: null)
+			};
+
+			return verificationTypeValue;
 		}
 
 		/// <summary>

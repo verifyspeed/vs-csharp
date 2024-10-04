@@ -11,7 +11,8 @@ namespace VSCSharp.Clients
 		Task<CreatedVerification> CreateVerificationAsync(
 			string methodName,
 			string clientIPv4Address,
-			VerificationType verificationType
+			VerificationType verificationType,
+			string phoneNumber = null
 		);
 	
 		Task<VerificationResult> VerifyTokenAsync(string token);
