@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using VSCSharp.Clients;
+using VSCSharp.Constants;
 
 namespace VSCSharp
 {
@@ -13,7 +13,7 @@ namespace VSCSharp
 			services.AddScoped<IVerifySpeedClient>(
 				_ =>
 				{
-					var httpClient = new HttpClient { BaseAddress = new Uri("https://api.verifyspeed.com") };
+					var httpClient = new HttpClient { BaseAddress = new Uri(LibraryConstants.ApiBaseUrl) };
 					httpClient.DefaultRequestHeaders.Add(name: "server-key", serverKey);
 
 					return new VerifySpeedClient(httpClient);
