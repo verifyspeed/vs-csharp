@@ -1,4 +1,3 @@
-using System;
 using System.Net.Http;
 using System.Net.Mime;
 using System.Text;
@@ -8,9 +7,11 @@ using VSCSharp.Constants;
 using VSCSharp.Enums;
 using VSCSharp.Exceptions;
 using VSCSharp.Models.Commons;
+using VSCSharp.Tools;
 
 namespace VSCSharp.Clients
 {
+	/// <inheritdoc/>
 	public class VerifySpeedClient : IVerifySpeedClient
 	{
 		private readonly HttpClient httpClient;
@@ -20,16 +21,16 @@ namespace VSCSharp.Clients
 			PropertyNameCaseInsensitive = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase
 		};
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="VerifySpeedClient"/> class.
+		/// </summary>
+		/// <param name="httpClient">The HTTP client used for making API requests.</param>
 		public VerifySpeedClient(HttpClient httpClient)
 		{
 			this.httpClient = httpClient;
 		}
 
-		/// <summary>
-		/// Initializes the verification process
-		/// </summary>
-		/// <returns><see cref="Initialization"/></returns>
-		/// <exception cref="FailedInitializationException">Thrown when the initialization fails</exception>
+		/// <inheritdoc/>
 		public async Task<Initialization> InitializeAsync(string clientIPv4Address)
 		{
 			httpClient.DefaultRequestHeaders.Add(name: LibraryConstants.ClientIPv4AddressHeaderName, clientIPv4Address);
@@ -62,15 +63,7 @@ namespace VSCSharp.Clients
 			}
 		}
 
-		/// <summary>
-		/// Creates a verification
-		/// </summary>
-		/// <param name="methodName">The method name to use for verification</param>
-		/// <param name="clientIPv4Address">The client's IP address</param>
-		/// <param name="verificationType">The type of verification to create</param>
-		/// <param name="phoneNumber">Phone number to send otp to if verification type is OTP</param>
-		/// <returns></returns>
-		/// <exception cref="FailedCreateVerificationException"></exception>
+		/// <inheritdoc/>
 		public async Task<CreatedVerification> CreateVerificationAsync(
 			string methodName,
 			string clientIPv4Address,
@@ -79,7 +72,7 @@ namespace VSCSharp.Clients
 		)
 		{
 			httpClient.DefaultRequestHeaders.Add(name: LibraryConstants.ClientIPv4AddressHeaderName, clientIPv4Address);
-			string verificationTypeValue = GetVerificationTypeValue(verificationType);
+			string verificationTypeValue = verificationType.GetVerificationTypeValue();
 
 			HttpResponseMessage response = await httpClient.PostAsync(
 				requestUri: "v1/verifications/create",
@@ -127,6 +120,7 @@ namespace VSCSharp.Clients
 			}
 		}
 
+		/// <inheritdoc/>
 		public async Task<CreatedVerification> CreateVerificationAsync(
 			MethodType methodType,
 			string clientIPv4Address,
@@ -134,30 +128,12 @@ namespace VSCSharp.Clients
 			string phoneNumber = null
 		)
 		{
-			string methodName = GetMethodName(methodType);
+			string methodName = methodType.GetMethodName();
 
 			return await CreateVerificationAsync(methodName, clientIPv4Address, verificationType, phoneNumber);
 		}
 
-		private static string GetVerificationTypeValue(VerificationType verificationType)
-		{
-			string verificationTypeValue = verificationType switch
-			{
-				VerificationType.DeepLink => VerificationTypeValues.DeepLink,
-				VerificationType.QRCode => VerificationTypeValues.QRCode,
-				VerificationType.OTP => VerificationTypeValues.OTP,
-				_ => throw new ArgumentOutOfRangeException(nameof(verificationType), verificationType, message: null)
-			};
-
-			return verificationTypeValue;
-		}
-
-		/// <summary>
-		/// Verifies the token and returns the result
-		/// </summary>
-		/// <param name="token">The token to verify </param>
-		/// <returns><see cref="VerificationResult"/></returns>
-		/// <exception cref="FailedVerifyingTokenException"></exception>
+		/// <inheritdoc/>
 		public async Task<VerificationResult> VerifyTokenAsync(string token)
 		{
 			httpClient.DefaultRequestHeaders.Add(name: "token", token);
@@ -188,17 +164,6 @@ namespace VSCSharp.Clients
 					exception
 				);
 			}
-		}
-		
-		private static string GetMethodName(MethodType methodType)
-		{
-			return methodType switch
-			{
-				MethodType.TelegramMessage => MethodTypeValues.TelegramMessage,
-				MethodType.WhatsAppMessage => MethodTypeValues.WhatsAppMessage,
-				MethodType.SmsOtp => MethodTypeValues.SmsOtp,
-				_ => throw new ArgumentOutOfRangeException(nameof(methodType), methodType, message: null)
-			};
 		}
 	}
 }

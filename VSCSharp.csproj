@@ -2,13 +2,15 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <PackageId>VerifySpeed.VSCSharp</PackageId>
-        <Version>1.0.4</Version>
+        <PackageId>VerifySpeed.VSCSharp-dev</PackageId>
+        <Version>1.0.5</Version>
         <Title>VSCSharp</Title>
         <Authors>RekarPC98</Authors>
+        <Nullable>true</Nullable>
         <Description>Integration SDK for VerifySpeed API</Description>
         <PackageProjectUrl>https://github.com/verifyspeed/vs-csharp</PackageProjectUrl>
         <RepositoryUrl>https://github.com/verifyspeed/vs-csharp</RepositoryUrl>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
