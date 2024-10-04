@@ -1,6 +1,6 @@
 namespace VSCSharp.Constants
 {
-	internal class VerificationTypeValues
+	public class VerificationTypeValues
 	{
 		public const string DeepLink = "deep-link";
 		public const string QRCode = "qr-code";

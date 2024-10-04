@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Mime;
 using System.Text;
@@ -81,7 +80,7 @@ namespace VSCSharp.Clients
 		{
 			httpClient.DefaultRequestHeaders.Add(name: LibraryConstants.ClientIPv4AddressHeaderName, clientIPv4Address);
 			string verificationTypeValue = GetVerificationTypeValue(verificationType);
-			
+
 			HttpResponseMessage response = await httpClient.PostAsync(
 				requestUri: "v1/verifications/create",
 				new StringContent(
@@ -126,6 +125,18 @@ namespace VSCSharp.Clients
 					exception
 				);
 			}
+		}
+
+		public async Task<CreatedVerification> CreateVerificationAsync(
+			MethodType methodType,
+			string clientIPv4Address,
+			VerificationType verificationType,
+			string phoneNumber = null
+		)
+		{
+			string methodName = GetMethodName(methodType);
+
+			return await CreateVerificationAsync(methodName, clientIPv4Address, verificationType, phoneNumber);
 		}
 
 		private static string GetVerificationTypeValue(VerificationType verificationType)
@@ -177,6 +188,17 @@ namespace VSCSharp.Clients
 					exception
 				);
 			}
+		}
+		
+		private static string GetMethodName(MethodType methodType)
+		{
+			return methodType switch
+			{
+				MethodType.TelegramMessage => MethodTypeValues.TelegramMessage,
+				MethodType.WhatsAppMessage => MethodTypeValues.WhatsAppMessage,
+				MethodType.SmsOtp => MethodTypeValues.SmsOtp,
+				_ => throw new ArgumentOutOfRangeException(nameof(methodType), methodType, message: null)
+			};
 		}
 	}
 }
