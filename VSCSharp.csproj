@@ -6,7 +6,7 @@
         <Version>1.0.5</Version>
         <Title>VSCSharp</Title>
         <Authors>RekarPC98</Authors>
-        <Nullable>true</Nullable>
+        <Nullable>enable</Nullable>
         <Description>Integration SDK for VerifySpeed API</Description>
         <PackageProjectUrl>https://github.com/verifyspeed/vs-csharp</PackageProjectUrl>
         <RepositoryUrl>https://github.com/verifyspeed/vs-csharp</RepositoryUrl>
