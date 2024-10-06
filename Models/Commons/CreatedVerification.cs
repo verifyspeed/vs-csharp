@@ -12,6 +12,12 @@ namespace VSCSharp.Models.Commons
 		/// </summary>
 		[JsonPropertyName("MethodName")]
 		public string MethodName { get; init; } = null!;
+		
+		/// <summary>
+		/// Gets the type of verification (e.g., "deep-link").
+		/// </summary>
+		[JsonPropertyName("verificationType")]
+		public string VerificationType { get; init; } = null!;
 
 		/// <summary>
 		/// Gets the unique key associated with the created verification.
