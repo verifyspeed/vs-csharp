@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <PackageId>VerifySpeed.VSCSharp-dev</PackageId>
+        <PackageId>VerifySpeed.VSCSharp</PackageId>
         <Version>1.0.5</Version>
         <Title>VSCSharp</Title>
         <Authors>RekarPC98</Authors>
