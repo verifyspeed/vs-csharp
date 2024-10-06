@@ -68,7 +68,7 @@ namespace VSCSharp.Clients
 			string methodName,
 			string clientIPv4Address,
 			VerificationType verificationType,
-			string phoneNumber = null
+			string? phoneNumber = null
 		)
 		{
 			httpClient.DefaultRequestHeaders.Add(name: LibraryConstants.ClientIPv4AddressHeaderName, clientIPv4Address);
@@ -125,7 +125,7 @@ namespace VSCSharp.Clients
 			MethodType methodType,
 			string clientIPv4Address,
 			VerificationType verificationType,
-			string phoneNumber = null
+			string? phoneNumber = null
 		)
 		{
 			string methodName = methodType.GetMethodName();

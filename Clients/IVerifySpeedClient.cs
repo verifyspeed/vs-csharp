@@ -31,7 +31,7 @@ namespace VSCSharp.Clients
 			string methodName,
 			string clientIPv4Address,
 			VerificationType verificationType,
-			string phoneNumber = null
+			string? phoneNumber = null
 		);
 
 		/// <summary>
@@ -47,7 +47,7 @@ namespace VSCSharp.Clients
 			MethodType methodType,
 			string clientIPv4Address,
 			VerificationType verificationType,
-			string phoneNumber = null
+			string? phoneNumber = null
 		);
 
 		/// <summary>
