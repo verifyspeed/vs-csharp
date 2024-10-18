@@ -68,7 +68,8 @@ namespace VSCSharp.Clients
 			string methodName,
 			string clientIPv4Address,
 			VerificationType verificationType,
-			string? phoneNumber = null
+			string? phoneNumber = null,
+			string? language = null
 		)
 		{
 			httpClient.DefaultRequestHeaders.Add(name: LibraryConstants.ClientIPv4AddressHeaderName, clientIPv4Address);
@@ -82,7 +83,8 @@ namespace VSCSharp.Clients
 						{
 							methodName = methodName,
 							verificationType = verificationTypeValue,
-							phoneNumber = phoneNumber
+							phoneNumber = phoneNumber,
+							language = language
 						},
 						JsonSerializerOptions
 					),
