@@ -127,12 +127,19 @@ namespace VSCSharp.Clients
 			MethodType methodType,
 			string clientIPv4Address,
 			VerificationType verificationType,
-			string? phoneNumber = null
+			string? phoneNumber = null,
+			string? language = null
 		)
 		{
 			string methodName = methodType.GetMethodName();
 
-			return await CreateVerificationAsync(methodName, clientIPv4Address, verificationType, phoneNumber);
+			return await CreateVerificationAsync(
+				methodName,
+				clientIPv4Address,
+				verificationType,
+				phoneNumber,
+				language
+			);
 		}
 
 		/// <inheritdoc/>
