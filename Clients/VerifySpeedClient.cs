@@ -68,7 +68,6 @@ namespace VSCSharp.Clients
 			string methodName,
 			string clientIPv4Address,
 			VerificationType verificationType,
-			string? phoneNumber = null,
 			string? language = null
 		)
 		{
@@ -83,7 +82,6 @@ namespace VSCSharp.Clients
 						{
 							methodName = methodName,
 							verificationType = verificationTypeValue,
-							phoneNumber = phoneNumber,
 							language = language
 						},
 						JsonSerializerOptions
@@ -127,19 +125,12 @@ namespace VSCSharp.Clients
 			MethodType methodType,
 			string clientIPv4Address,
 			VerificationType verificationType,
-			string? phoneNumber = null,
 			string? language = null
 		)
 		{
 			string methodName = methodType.GetMethodName();
 
-			return await CreateVerificationAsync(
-				methodName,
-				clientIPv4Address,
-				verificationType,
-				phoneNumber,
-				language
-			);
+			return await CreateVerificationAsync(methodName, clientIPv4Address, verificationType, language);
 		}
 
 		/// <inheritdoc/>
