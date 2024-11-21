@@ -28,5 +28,4 @@ namespace VSCSharp.Models.Commons
 		[JsonPropertyName("phoneNumber")]
 		public string PhoneNumber { get; init; } = null!;
 	}
-
 }

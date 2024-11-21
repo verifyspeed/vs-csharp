@@ -66,6 +66,7 @@ namespace VSCSharp.Tools
 				MethodType.TelegramMessage => MethodNames.TelegramMessage,
 				MethodType.WhatsAppMessage => MethodNames.WhatsAppMessage,
 				MethodType.SmsOtp => MethodNames.SmsOtp,
+				MethodType.WhatsAppOtp => MethodNames.WhatsAppOtp,
 				_ => throw new ArgumentOutOfRangeException(nameof(methodType), methodType, message: null)
 			};
 		}
@@ -85,6 +86,7 @@ namespace VSCSharp.Tools
 				MethodNames.TelegramMessage => MethodType.TelegramMessage,
 				MethodNames.WhatsAppMessage => MethodType.WhatsAppMessage,
 				MethodNames.SmsOtp => MethodType.SmsOtp,
+				MethodNames.WhatsAppOtp => MethodType.WhatsAppOtp,
 				_ => throw new ArgumentOutOfRangeException(
 					nameof(value),
 					value,

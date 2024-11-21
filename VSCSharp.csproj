@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <PackageId>VerifySpeed.VSCSharp</PackageId>
-        <Version>1.0.9</Version>
+        <Version>1.0.10</Version>
         <Title>VSCSharp</Title>
         <Authors>RekarPC98</Authors>
         <Nullable>enable</Nullable>

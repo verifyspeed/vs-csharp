@@ -18,6 +18,11 @@ namespace VSCSharp.Enums
 		/// <summary>
 		/// Represents the method of sending a verification message via SMS with a one-time password (OTP).
 		/// </summary>
-		SmsOtp
+		SmsOtp,
+
+		/// <summary>
+		/// Represents the method of sending a verification message via WhatsApp with a one-time password (OTP).
+		/// </summary>
+		WhatsAppOtp
 	}
 }

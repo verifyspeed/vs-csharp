@@ -19,6 +19,10 @@ namespace VSCSharp.Constants
 		/// The string value representing the method name for sending verification messages via SMS with a one-time password (OTP).
 		/// </summary>
 		public const string SmsOtp = "sms-otp";
-	}
 
+		/// <summary>
+		///  The string value representing the method name for sending verification messages via WhatsApp with a one-time password (OTP).
+		///  </summary>
+		public const string WhatsAppOtp = "whatsapp-otp";
+	}
 }
