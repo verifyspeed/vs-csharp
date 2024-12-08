@@ -14,12 +14,6 @@ namespace VSCSharp.Models.Commons
 		public string MethodName { get; init; } = null!;
 		
 		/// <summary>
-		/// Gets the type of verification (e.g., "deep-link").
-		/// </summary>
-		[JsonPropertyName("verificationType")]
-		public string VerificationType { get; init; } = null!;
-
-		/// <summary>
 		/// Gets the unique key associated with the created verification.
 		/// </summary>
 		[JsonPropertyName("verificationKey")]
@@ -31,12 +25,5 @@ namespace VSCSharp.Models.Commons
 		/// </summary>
 		[JsonPropertyName("deepLink")]
 		public string? DeepLink { get; init; }
-
-		/// <summary>
-		/// Gets the URL of the QR code image associated with the verification, if applicable.
-		/// This can be <c>null</c> if the verification method does not use a QR code.
-		/// </summary>
-		[JsonPropertyName("qrCodeImage")]
-		public string? QrCodeImage { get; init; }
 	}
 }

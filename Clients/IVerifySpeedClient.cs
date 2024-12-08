@@ -23,14 +23,12 @@ namespace VSCSharp.Clients
 		/// </summary>
 		/// <param name="methodName">The method name to use for verification (e.g., "TelegramMessage", "WhatsAppMessage").</param>
 		/// <param name="clientIPv4Address">The client's IPv4 address to include in the request header.</param>
-		/// <param name="verificationType">The type of verification to create (e.g., QR code, OTP).</param>
 		/// <param name="language">The language to use for the verification process. Optional.</param>
 		/// <returns>A <see cref="CreatedVerification"/> object that represents the created verification.</returns>
 		/// <exception cref="FailedCreateVerificationException">Thrown when the verification creation fails.</exception>
 		Task<CreatedVerification> CreateVerificationAsync(
 			string methodName,
 			string clientIPv4Address,
-			VerificationType verificationType,
 			string? language = null
 		);
 
@@ -39,14 +37,12 @@ namespace VSCSharp.Clients
 		/// </summary>
 		/// <param name="methodType">The method type to use for verification (e.g., <see cref="MethodType.TelegramMessage"/>).</param>
 		/// <param name="clientIPv4Address">The client's IPv4 address to include in the request header.</param>
-		/// <param name="verificationType">The type of verification to create (e.g., QR code, OTP).</param>
 		/// <param name="language">The language to use for the verification process. Optional.</param>
 		/// <returns>A <see cref="CreatedVerification"/> object that represents the created verification.</returns>
 		/// <exception cref="FailedCreateVerificationException">Thrown when the verification creation fails.</exception>
 		Task<CreatedVerification> CreateVerificationAsync(
 			MethodType methodType,
 			string clientIPv4Address,
-			VerificationType verificationType,
 			string? language = null
 		);
 

@@ -67,12 +67,10 @@ namespace VSCSharp.Clients
 		public async Task<CreatedVerification> CreateVerificationAsync(
 			string methodName,
 			string clientIPv4Address,
-			VerificationType verificationType,
 			string? language = null
 		)
 		{
 			httpClient.DefaultRequestHeaders.Add(name: LibraryConstants.ClientIPv4AddressHeaderName, clientIPv4Address);
-			string verificationTypeValue = verificationType.GetVerificationTypeValue();
 
 			HttpResponseMessage response = await httpClient.PostAsync(
 				requestUri: "v1/verifications/create",
@@ -81,7 +79,6 @@ namespace VSCSharp.Clients
 						new
 						{
 							methodName = methodName,
-							verificationType = verificationTypeValue,
 							language = language
 						},
 						JsonSerializerOptions
@@ -124,13 +121,12 @@ namespace VSCSharp.Clients
 		public async Task<CreatedVerification> CreateVerificationAsync(
 			MethodType methodType,
 			string clientIPv4Address,
-			VerificationType verificationType,
 			string? language = null
 		)
 		{
 			string methodName = methodType.GetMethodName();
 
-			return await CreateVerificationAsync(methodName, clientIPv4Address, verificationType, language);
+			return await CreateVerificationAsync(methodName, clientIPv4Address, language);
 		}
 
 		/// <inheritdoc/>
