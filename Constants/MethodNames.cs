@@ -6,23 +6,28 @@ namespace VSCSharp.Constants
 	public class MethodNames
 	{
 		/// <summary>
-		/// The string value representing the method name for sending verification messages via Telegram.
+		/// Represents the method of using Telegram message in the verification process.
 		/// </summary>
 		public const string TelegramMessage = "telegram-message";
 
 		/// <summary>
-		/// The string value representing the method name for sending verification messages via WhatsApp.
+		/// Represents the method of using WhatsApp message in the verification process.
 		/// </summary>
 		public const string WhatsAppMessage = "whatsapp-message";
 
 		/// <summary>
-		/// The string value representing the method name for sending verification messages via SMS with a one-time password (OTP).
+		/// Represents the method of sending a verification code via SMS.
 		/// </summary>
 		public const string SmsOtp = "sms-otp";
 
 		/// <summary>
-		///  The string value representing the method name for sending verification messages via WhatsApp with a one-time password (OTP).
-		///  </summary>
+		/// Represents the method of sending a verification code via WhatsApp
+		/// </summary>
 		public const string WhatsAppOtp = "whatsapp-otp";
+
+		/// <summary>
+		/// Represents the method of sending a verification code via Telegram
+		/// </summary>
+		public const string TelegramOtp = "telegram-otp";
 	}
 }

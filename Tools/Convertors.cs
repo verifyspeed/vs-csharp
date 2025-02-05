@@ -10,7 +10,7 @@ namespace VSCSharp.Tools
 	public static class Convertors
 	{
 		/// <summary>
-		/// Converts a <see cref="MethodType"/> to its corresponding string value.
+		/// Converts a <see cref="MethodType"/> to its corresponding method name in string value.
 		/// </summary>
 		/// <param name="methodType">The method type to convert.</param>
 		/// <returns>A string representing the method type.</returns>
@@ -25,7 +25,12 @@ namespace VSCSharp.Tools
 				MethodType.WhatsAppMessage => MethodNames.WhatsAppMessage,
 				MethodType.SmsOtp => MethodNames.SmsOtp,
 				MethodType.WhatsAppOtp => MethodNames.WhatsAppOtp,
-				_ => throw new ArgumentOutOfRangeException(nameof(methodType), methodType, message: null)
+				MethodType.TelegramOtp => MethodNames.TelegramOtp,
+				_ => throw new ArgumentOutOfRangeException(
+					nameof(methodType),
+					methodType,
+					message: "Invalid method type provided"
+				)
 			};
 		}
 
@@ -35,7 +40,7 @@ namespace VSCSharp.Tools
 		/// <param name="value">The string value to convert.</param>
 		/// <returns>The corresponding method type.</returns>
 		/// <exception cref="ArgumentOutOfRangeException">
-		/// Thrown when an invalid method name value is provided.
+		/// Thrown when a value is provided.
 		/// </exception>
 		public static MethodType GetMethodType(this string value)
 		{
@@ -45,6 +50,7 @@ namespace VSCSharp.Tools
 				MethodNames.WhatsAppMessage => MethodType.WhatsAppMessage,
 				MethodNames.SmsOtp => MethodType.SmsOtp,
 				MethodNames.WhatsAppOtp => MethodType.WhatsAppOtp,
+				MethodNames.TelegramOtp => MethodType.TelegramOtp,
 				_ => throw new ArgumentOutOfRangeException(
 					nameof(value),
 					value,

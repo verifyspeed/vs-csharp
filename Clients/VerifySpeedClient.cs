@@ -76,11 +76,7 @@ namespace VSCSharp.Clients
 				requestUri: "v1/verifications/create",
 				new StringContent(
 					JsonSerializer.Serialize(
-						new
-						{
-							methodName = methodName,
-							language = language
-						},
+						new { methodName = methodName, language = language },
 						JsonSerializerOptions
 					),
 					Encoding.UTF8,

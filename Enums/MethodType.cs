@@ -1,28 +1,35 @@
+using VSCSharp.Constants;
+
 namespace VSCSharp.Enums
 {
 	/// <summary>
-	/// Specifies the different methods available for verification process.
+	/// Enumeration representation of <see cref="MethodNames"/> values
 	/// </summary>
 	public enum MethodType
 	{
 		/// <summary>
-		/// Represents the method of using a verification message via Telegram.
+		/// The enum value representing <see cref="MethodNames.TelegramMessage"/>.
 		/// </summary>
 		TelegramMessage,
 
 		/// <summary>
-		/// Represents the method of using a verification message via WhatsApp.
+		/// The enum value representing <see cref="MethodNames.WhatsAppMessage"/>.
 		/// </summary>
 		WhatsAppMessage,
 
 		/// <summary>
-		/// Represents the method of sending a verification message via SMS with a one-time password (OTP).
+		/// The enum value representing <see cref="MethodNames.SmsOtp"/>.
 		/// </summary>
 		SmsOtp,
 
 		/// <summary>
-		/// Represents the method of sending a verification message via WhatsApp with a one-time password (OTP).
+		/// The enum value representing <see cref="MethodNames.WhatsAppOtp"/>.
 		/// </summary>
-		WhatsAppOtp
+		WhatsAppOtp,
+
+		/// <summary>
+		/// The enum value representing <see cref="MethodNames.TelegramOtp"/>.
+		/// </summary>
+		TelegramOtp
 	}
 }
