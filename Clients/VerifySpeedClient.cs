@@ -4,10 +4,8 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using VSCSharp.Constants;
-using VSCSharp.Enums;
 using VSCSharp.Exceptions;
 using VSCSharp.Models.Commons;
-using VSCSharp.Tools;
 
 namespace VSCSharp.Clients
 {
@@ -111,18 +109,6 @@ namespace VSCSharp.Clients
 					exception
 				);
 			}
-		}
-
-		/// <inheritdoc/>
-		public async Task<CreatedVerification> CreateVerificationAsync(
-			MethodType methodType,
-			string clientIPv4Address,
-			string? language = null
-		)
-		{
-			string methodName = methodType.GetMethodName();
-
-			return await CreateVerificationAsync(methodName, clientIPv4Address, language);
 		}
 
 		/// <inheritdoc/>

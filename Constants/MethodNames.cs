@@ -29,5 +29,10 @@ namespace VSCSharp.Constants
 		/// Represents the method of sending a verification code via Telegram
 		/// </summary>
 		public const string TelegramOtp = "telegram-otp";
+
+		/// <summary>
+		/// Represents the method of sending a verification code via available channel
+		/// </summary>
+		public const string DynamicOtp = "dynamic-otp";
 	}
 }
