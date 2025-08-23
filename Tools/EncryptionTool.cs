@@ -19,7 +19,6 @@ namespace VSCSharp.Tools
 		/// <param name="token">The Base64-encoded encrypted token string to decrypt.</param>
 		/// <param name="serverKey">
 		/// The server key used for AES decryption.
-		/// The key must be 16, 24, or 32 bytes in length when encoded as UTF-8.
 		/// </param>
 		/// <returns>
 		/// A <see cref="VerificationResult"/> object representing the decrypted token.
