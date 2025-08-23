@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using VSCSharp.Constants;
 using VSCSharp.Exceptions;
 using VSCSharp.Models.Commons;
+using VSCSharp.Tools;
 
 namespace VSCSharp.Clients
 {
@@ -145,6 +146,14 @@ namespace VSCSharp.Clients
 					exception
 				);
 			}
+		}
+
+		/// <inheritdoc/>
+		public VerificationResult DecryptVerificationToken(string token)
+		{
+			VerificationResult result = token.DecryptVerificationToken(ServerKey);
+			
+			return result;
 		}
 	}
 }

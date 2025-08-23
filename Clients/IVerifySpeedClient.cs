@@ -38,7 +38,14 @@ namespace VSCSharp.Clients
 		/// <param name="token">The token to verify.</param>
 		/// <returns>A <see cref="VerificationResult"/> object that represents the verification result.</returns>
 		/// <exception cref="FailedVerifyingTokenException">Thrown when the token verification fails.</exception>
-		[Obsolete(message: "Use EncryptionTool.DecryptVerificationToken instead.", error: false)]
+		[Obsolete(message: "Use DecryptVerificationToken instead.", error: false)]
 		Task<VerificationResult> VerifyTokenAsync(string token);
+
+		/// <summary>
+		/// Decrypts the verification token and returns the verification result.
+		/// </summary>
+		/// <param name="token">The token to decrypt.</param>
+		/// <returns>A <see cref="VerificationResult"/> object that represents the verification result.</returns>
+		VerificationResult DecryptVerificationToken(string token);
 	}
 }
