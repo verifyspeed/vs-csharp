@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using VSCSharp.Exceptions;
 using VSCSharp.Models.Commons;
 
@@ -37,6 +38,17 @@ namespace VSCSharp.Clients
 		/// <param name="token">The token to verify.</param>
 		/// <returns>A <see cref="VerificationResult"/> object that represents the verification result.</returns>
 		/// <exception cref="FailedVerifyingTokenException">Thrown when the token verification fails.</exception>
+		[Obsolete(
+			message: "Use DecryptVerificationToken instead. VerifyTokenAsync will not be supported in future versions.",
+			error: false
+		)]
 		Task<VerificationResult> VerifyTokenAsync(string token);
+
+		/// <summary>
+		/// Decrypts the verification token and returns the verification result.
+		/// </summary>
+		/// <param name="token">The token to decrypt.</param>
+		/// <returns>A <see cref="VerificationResult"/> object that represents the verification result.</returns>
+		VerificationResult DecryptVerificationToken(string token);
 	}
 }

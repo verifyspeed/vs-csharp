@@ -25,7 +25,7 @@ namespace VSCSharp
 					var httpClient = new HttpClient { BaseAddress = new Uri(LibraryConstants.ApiBaseUrl) };
 					httpClient.DefaultRequestHeaders.Add(name: "server-key", serverKey);
 
-					return new VerifySpeedClient(httpClient);
+					return new VerifySpeedClient(httpClient, serverKey);
 				}
 			);
 

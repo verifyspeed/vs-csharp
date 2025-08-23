@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <PackageId>VerifySpeed.VSCSharp</PackageId>
-        <Version>1.0.14</Version>
+        <Version>1.0.15</Version>
         <Title>VSCSharp</Title>
         <Authors>RekarPC98</Authors>
         <Nullable>enable</Nullable>
@@ -11,6 +11,8 @@
         <PackageProjectUrl>https://github.com/verifyspeed/vs-csharp</PackageProjectUrl>
         <RepositoryUrl>https://github.com/verifyspeed/vs-csharp</RepositoryUrl>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <LangVersion>preview</LangVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>

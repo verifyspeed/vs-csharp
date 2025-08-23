@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using VSCSharp.Constants;
 using VSCSharp.Exceptions;
 using VSCSharp.Models.Commons;
+using VSCSharp.Tools;
 
 namespace VSCSharp.Clients
 {
 	/// <inheritdoc/>
 	public class VerifySpeedClient : IVerifySpeedClient
 	{
+		private string ServerKey { get; }
 		private readonly HttpClient httpClient;
 
 		private static readonly JsonSerializerOptions JsonSerializerOptions = new()
@@ -23,8 +25,10 @@ namespace VSCSharp.Clients
 		/// Initializes a new instance of the <see cref="VerifySpeedClient"/> class.
 		/// </summary>
 		/// <param name="httpClient">The HTTP client used for making API requests.</param>
-		public VerifySpeedClient(HttpClient httpClient)
+		/// <param name="serverKey"></param>
+		public VerifySpeedClient(HttpClient httpClient, string serverKey)
 		{
+			ServerKey = serverKey;
 			this.httpClient = httpClient;
 		}
 
@@ -142,6 +146,14 @@ namespace VSCSharp.Clients
 					exception
 				);
 			}
+		}
+
+		/// <inheritdoc/>
+		public VerificationResult DecryptVerificationToken(string token)
+		{
+			VerificationResult result = token.DecryptVerificationToken(ServerKey);
+			
+			return result;
 		}
 	}
 }
