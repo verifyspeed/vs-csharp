@@ -1,11 +1,11 @@
 using System.Text.Json.Serialization;
 
-namespace VSCSharp.Models.Commons
+namespace VSCSharp.Models
 {
 	/// <summary>
 	/// Represents the result of a created verification request.
 	/// </summary>
-	public record CreatedVerification
+	public record CreatedVerificationResponse
 	{
 		/// <summary>
 		/// Gets the name of the verification method (e.g., "whatsapp-message").

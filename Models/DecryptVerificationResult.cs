@@ -1,13 +1,12 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace VSCSharp.Models.Commons
+namespace VSCSharp.Models
 {
 	/// <summary>
-	/// Represents the result of a verification process, including the method used, 
-	/// the date of verification, and the verified phone number.
+	/// Represents the result of decryption of verification token.
 	/// </summary>
-	public record VerificationResult
+	public record DecryptVerificationResult
 	{
 		/// <summary>
 		/// Gets the name of the verification method used.

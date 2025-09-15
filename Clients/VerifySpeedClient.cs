@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using VSCSharp.Constants;
 using VSCSharp.Exceptions;
-using VSCSharp.Models.Commons;
+using VSCSharp.Models;
 using VSCSharp.Tools;
 
 namespace VSCSharp.Clients
@@ -66,7 +66,7 @@ namespace VSCSharp.Clients
 		}
 
 		/// <inheritdoc/>
-		public async Task<CreatedVerification> CreateVerificationAsync(
+		public async Task<CreatedVerificationResponse> CreateVerificationAsync(
 			string methodName,
 			string clientIPv4Address,
 			string? language = null
@@ -97,7 +97,7 @@ namespace VSCSharp.Clients
 
 			try
 			{
-				var result = JsonSerializer.Deserialize<CreatedVerification>(content, JsonSerializerOptions);
+				var result = JsonSerializer.Deserialize<CreatedVerificationResponse>(content, JsonSerializerOptions);
 
 				if (result is null)
 				{
@@ -116,28 +116,24 @@ namespace VSCSharp.Clients
 		}
 
 		/// <inheritdoc/>
-		public async Task<VerificationResult> VerifyTokenAsync(string token)
+		public async Task<VerifyTokenResponse> VerifyTokenAsync(string token)
 		{
 			httpClient.DefaultRequestHeaders.Add(name: "token", token);
-			HttpResponseMessage response = await httpClient.GetAsync("v1/verifications/result");
+			HttpResponseMessage responseMessage = await httpClient.GetAsync("v1/verifications/result");
 
-			if (!response.IsSuccessStatusCode)
+			if (!responseMessage.IsSuccessStatusCode)
 			{
-				throw new FailedVerifyingTokenException($"Failed to verify token, reason: {response.ReasonPhrase}");
+				throw new FailedVerifyingTokenException($"Failed to verify token, reason: {responseMessage.ReasonPhrase}");
 			}
 
-			string content = await response.Content.ReadAsStringAsync();
+			string content = await responseMessage.Content.ReadAsStringAsync();
 
 			try
 			{
-				var result = JsonSerializer.Deserialize<VerificationResult>(content, JsonSerializerOptions);
+				var response =
+					JsonSerializer.Deserialize<VerifyTokenResponse>(content, JsonSerializerOptions);
 
-				if (result is null)
-				{
-					throw new FailedVerifyingTokenException(message: "response content is null");
-				}
-
-				return result;
+				return response ?? throw new FailedVerifyingTokenException(message: "response content is null");
 			}
 			catch (JsonException exception)
 			{
@@ -149,10 +145,10 @@ namespace VSCSharp.Clients
 		}
 
 		/// <inheritdoc/>
-		public VerificationResult VerifyVerificationToken(string token)
+		public DecryptVerificationResult DecryptVerificationToken(string token)
 		{
-			VerificationResult result = token.VerifyVerificationToken(ServerKey);
-			
+			DecryptVerificationResult result = token.VerifyVerificationToken(ServerKey);
+
 			return result;
 		}
 	}

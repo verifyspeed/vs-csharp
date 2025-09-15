@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace VSCSharp.Models.Commons
+namespace VSCSharp.Models
 {
 	/// <summary>
 	/// Represents the initialization response which contains the available verification methods.

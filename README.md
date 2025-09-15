@@ -70,7 +70,7 @@ public class VerificationService
         _verifySpeedClient = verifySpeedClient;
     }
 
-    public async Task<VerificationResult> VerifyUserAsync(string token)
+    public async Task<DecryptVerificationResult> VerifyUserAsync(string token)
     {
         try
         {

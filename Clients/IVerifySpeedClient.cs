@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using VSCSharp.Exceptions;
-using VSCSharp.Models.Commons;
+using VSCSharp.Models;
 
 namespace VSCSharp.Clients
 {
@@ -24,9 +24,9 @@ namespace VSCSharp.Clients
 		/// <param name="methodName">The method name to use for verification (e.g., "TelegramMessage", "WhatsAppMessage").</param>
 		/// <param name="clientIPv4Address">The client's IPv4 address to include in the request header.</param>
 		/// <param name="language">The language to use for the verification process. Optional.</param>
-		/// <returns>A <see cref="CreatedVerification"/> object that represents the created verification.</returns>
+		/// <returns>A <see cref="CreatedVerificationResponse"/> object that represents the created verification.</returns>
 		/// <exception cref="FailedCreateVerificationException">Thrown when the verification creation fails.</exception>
-		Task<CreatedVerification> CreateVerificationAsync(
+		Task<CreatedVerificationResponse> CreateVerificationAsync(
 			string methodName,
 			string clientIPv4Address,
 			string? language = null
@@ -36,16 +36,15 @@ namespace VSCSharp.Clients
 		/// Verifies the token and returns the verification result.
 		/// </summary>
 		/// <param name="token">The token to verify.</param>
-		/// <returns>A <see cref="VerificationResult"/> object that represents the verification result.</returns>
+		/// <returns>A <see cref="DecryptVerificationResult"/> object that represents the verification result.</returns>
 		/// <exception cref="FailedVerifyingTokenException">Thrown when the token verification fails.</exception>
-		[Obsolete(message: "Use DecryptVerificationToken instead.", error: false)]
-		Task<VerificationResult> VerifyTokenAsync(string token);
+		Task<VerifyTokenResponse> VerifyTokenAsync(string token);
 
 		/// <summary>
 		/// Decrypts the verification token and returns the verification result.
 		/// </summary>
 		/// <param name="token">The token to decrypt.</param>
-		/// <returns>A <see cref="VerificationResult"/> object that represents the verification result.</returns>
-		VerificationResult VerifyVerificationToken(string token);
+		/// <returns>A <see cref="DecryptVerificationResult"/> object that represents the verification result.</returns>
+		DecryptVerificationResult DecryptVerificationToken(string token);
 	}
 }

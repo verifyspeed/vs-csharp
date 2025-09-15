@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using VSCSharp.Exceptions;
-using VSCSharp.Models.Commons;
+using VSCSharp.Models;
 
 namespace VSCSharp.Tools
 {
@@ -14,22 +14,22 @@ namespace VSCSharp.Tools
 	{
 		/// <summary>
 		/// Decrypts an encrypted verification token using the specified server key
-		/// and returns the corresponding <see cref="VerificationResult"/> object.
+		/// and returns the corresponding <see cref="DecryptVerificationResult"/> object.
 		/// </summary>
 		/// <param name="token">The Base64-encoded encrypted token string to decrypt.</param>
 		/// <param name="serverKey">
 		/// The server key used for AES decryption.
 		/// </param>
 		/// <returns>
-		/// A <see cref="VerificationResult"/> object representing the decrypted token.
+		/// A <see cref="DecryptVerificationResult"/> object representing the decrypted token.
 		/// </returns>
 		/// <exception cref="InvalidVerificationTokenException">
-		/// Thrown when the token is <c>null</c>, empty, or cannot be parsed into a valid <see cref="VerificationResult"/>.
+		/// Thrown when the token is <c>null</c>, empty, or cannot be parsed into a valid <see cref="DecryptVerificationResult"/>.
 		/// </exception>
 		/// <exception cref="FailedDecryptingVerificationTokenException">
 		/// Thrown when the token cannot be decrypted due to an underlying cryptographic error.
 		/// </exception>
-		public static VerificationResult VerifyVerificationToken(this string token, string serverKey)
+		public static DecryptVerificationResult VerifyVerificationToken(this string token, string serverKey)
 		{
 			if (string.IsNullOrWhiteSpace(token))
 			{
@@ -54,7 +54,7 @@ namespace VSCSharp.Tools
 				throw new InvalidVerificationTokenException("The verification token has expired");
 			}
 			
-			var result = new VerificationResult
+			var result = new DecryptVerificationResult
 			{
 				PhoneNumber = phoneNumber,
 				DateOfVerification = dateOfVerification,

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace VSCSharp.Models.Commons
+namespace VSCSharp.Models
 {
 	/// <summary>
 	/// Represents a verification method with its technical name and user-friendly display name.
