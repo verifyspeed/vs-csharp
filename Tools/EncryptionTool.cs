@@ -39,7 +39,7 @@ namespace VSCSharp.Tools
 			string decrypted = Decrypt(token, serverKey);
 			string[] parts = decrypted.Split('|');
 
-			if (parts.Length != 3)
+			if (parts.Length < 4)
 			{
 				throw new InvalidVerificationTokenException("The token format is invalid or corrupted");
 			}
