@@ -70,12 +70,12 @@ public class VerificationService
         _verifySpeedClient = verifySpeedClient;
     }
 
-    public async Task<DecryptVerificationResult> VerifyUserAsync(string token)
+    public async Task<DecryptTokenResult> VerifyUserAsync(string token)
     {
         try
         {
             // Decrypt token locally (recommended)
-            var result = _verifySpeedClient.DecryptVerificationToken(token);
+            var result = _verifySpeedClient.DecryptToken(token);
             
             // Or use API verification
             // var result = await _verifySpeedClient.VerifyTokenAsync(token);
@@ -166,7 +166,7 @@ public async Task InitializeVerificationAsync()
 ### Create Verification
 
 ```csharp
-public async Task<CreatedVerification> CreateVerificationAsync()
+public async Task<CreatedVerificationResponse> CreateVerificationAsync()
 {
     try
     {
@@ -194,7 +194,7 @@ The library provides specific exception types for better error handling:
 ```csharp
 try
 {
-    var result = _verifySpeedClient.DecryptVerificationToken(token);
+    var result = _verifySpeedClient.DecryptToken(token);
 }
 catch (InvalidVerificationTokenException ex)
 {
