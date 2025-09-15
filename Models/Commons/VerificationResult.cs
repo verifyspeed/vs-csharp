@@ -27,5 +27,11 @@ namespace VSCSharp.Models.Commons
 		/// </summary>
 		[JsonPropertyName("phoneNumber")]
 		public string PhoneNumber { get; init; } = null!;
+
+		/// <summary>
+		/// Gets the verification key.
+		/// </summary>
+		[JsonPropertyName("verificationKey")]
+		public string VerificationKey { get; init; } = null!;
 	}
 }

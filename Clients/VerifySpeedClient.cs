@@ -149,9 +149,9 @@ namespace VSCSharp.Clients
 		}
 
 		/// <inheritdoc/>
-		public VerificationResult DecryptVerificationToken(string token)
+		public VerificationResult VerifyVerificationToken(string token)
 		{
-			VerificationResult result = token.DecryptVerificationToken(ServerKey);
+			VerificationResult result = token.VerifyVerificationToken(ServerKey);
 			
 			return result;
 		}

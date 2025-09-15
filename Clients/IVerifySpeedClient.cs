@@ -46,6 +46,6 @@ namespace VSCSharp.Clients
 		/// </summary>
 		/// <param name="token">The token to decrypt.</param>
 		/// <returns>A <see cref="VerificationResult"/> object that represents the verification result.</returns>
-		VerificationResult DecryptVerificationToken(string token);
+		VerificationResult VerifyVerificationToken(string token);
 	}
 }

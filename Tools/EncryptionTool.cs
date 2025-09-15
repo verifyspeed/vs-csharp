@@ -29,7 +29,7 @@ namespace VSCSharp.Tools
 		/// <exception cref="FailedDecryptingVerificationTokenException">
 		/// Thrown when the token cannot be decrypted due to an underlying cryptographic error.
 		/// </exception>
-		public static VerificationResult DecryptVerificationToken(this string token, string serverKey)
+		public static VerificationResult VerifyVerificationToken(this string token, string serverKey)
 		{
 			if (string.IsNullOrWhiteSpace(token))
 			{
@@ -47,10 +47,19 @@ namespace VSCSharp.Tools
 			string phoneNumber = GetPhoneNumber(parts[0]);
 			DateTime dateOfVerification = GetDateOfVerification(parts[1]);
 			string methodName = GetMethodName(parts[2]);
+			string verificationKey = GetVerificationKey(parts[3]);
 
+			if (dateOfVerification.AddMinutes(5) < DateTime.UtcNow)
+			{
+				throw new InvalidVerificationTokenException("The verification token has expired");
+			}
+			
 			var result = new VerificationResult
 			{
-				PhoneNumber = phoneNumber, DateOfVerification = dateOfVerification, MethodName = methodName
+				PhoneNumber = phoneNumber,
+				DateOfVerification = dateOfVerification,
+				MethodName = methodName,
+				VerificationKey = verificationKey
 			};
 
 			return result;
@@ -83,7 +92,12 @@ namespace VSCSharp.Tools
 		}
 
 		private static string GetMethodName(string methodNamePart) =>
-			methodNamePart ?? throw new InvalidVerificationTokenException("The method name part of the token is missing");
+			methodNamePart ??
+			throw new InvalidVerificationTokenException("The method name part of the token is missing");
+
+		private static string GetVerificationKey(string verificationKeyPart) =>
+			verificationKeyPart ??
+			throw new InvalidVerificationTokenException("The verification key part of the token is missing");
 
 		private static DateTime GetDateOfVerification(string? dateOfVerificationPart)
 		{
@@ -97,6 +111,7 @@ namespace VSCSharp.Tools
 		}
 
 		private static string GetPhoneNumber(string? phoneNumberPart) =>
-			phoneNumberPart ?? throw new InvalidVerificationTokenException("The phone number part of the token is missing");
+			phoneNumberPart ??
+			throw new InvalidVerificationTokenException("The phone number part of the token is missing");
 	}
 }
