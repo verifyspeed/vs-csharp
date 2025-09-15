@@ -6,7 +6,7 @@ namespace VSCSharp.Models
 	/// <summary>
 	/// Represents the result of decryption of verification token.
 	/// </summary>
-	public record DecryptVerificationResult
+	public record DecryptTokenResult
 	{
 		/// <summary>
 		/// Gets the name of the verification method used.

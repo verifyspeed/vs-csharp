@@ -33,18 +33,18 @@ namespace VSCSharp.Clients
 		);
 
 		/// <summary>
-		/// Verifies the token and returns the verification result.
+		/// Verify verification token on VerifySpeed API.
 		/// </summary>
 		/// <param name="token">The token to verify.</param>
-		/// <returns>A <see cref="DecryptVerificationResult"/> object that represents the verification result.</returns>
+		/// <returns>A <see cref="VerifyTokenResponse"/> object that represents the API call response.</returns>
 		/// <exception cref="FailedVerifyingTokenException">Thrown when the token verification fails.</exception>
 		Task<VerifyTokenResponse> VerifyTokenAsync(string token);
 
 		/// <summary>
-		/// Decrypts the verification token and returns the verification result.
+		/// Decrypts the verification token and returns the result.
 		/// </summary>
 		/// <param name="token">The token to decrypt.</param>
-		/// <returns>A <see cref="DecryptVerificationResult"/> object that represents the verification result.</returns>
-		DecryptVerificationResult DecryptVerificationToken(string token);
+		/// <returns>A <see cref="DecryptTokenResult"/> object that represents the result.</returns>
+		DecryptTokenResult DecryptToken(string token);
 	}
 }
