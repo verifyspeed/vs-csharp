@@ -149,9 +149,9 @@ public async Task InitializeVerificationAsync()
     try
     {
         var clientIp = "192.168.1.1"; // Replace with actual client IP
-        var initialization = await _verifySpeedClient.InitializeAsync(clientIp);
+        var initializationResponse = await _verifySpeedClient.InitializeAsync(clientIp);
         
-        foreach (var method in initialization.AvailableMethods)
+        foreach (var method in initializationResponse.AvailableMethods)
         {
             Console.WriteLine($"- {method.DisplayName} ({method.MethodName})");
         }

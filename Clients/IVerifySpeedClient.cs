@@ -14,9 +14,9 @@ namespace VSCSharp.Clients
 		/// Initializes the verification process.
 		/// </summary>
 		/// <param name="clientIPv4Address">The client's IPv4 address to include in the request header.</param>
-		/// <returns>An <see cref="Initialization"/> object that represents the initialization result.</returns>
+		/// <returns>An <see cref="InitializeResponse"/> object that represents the initialization result.</returns>
 		/// <exception cref="FailedInitializationException">Thrown when the initialization fails.</exception>
-		Task<Initialization> InitializeAsync(string clientIPv4Address);
+		Task<InitializeResponse> InitializeAsync(string clientIPv4Address);
 
 		/// <summary>
 		/// Creates a verification.

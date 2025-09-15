@@ -33,7 +33,7 @@ namespace VSCSharp.Clients
 		}
 
 		/// <inheritdoc/>
-		public async Task<Initialization> InitializeAsync(string clientIPv4Address)
+		public async Task<InitializeResponse> InitializeAsync(string clientIPv4Address)
 		{
 			httpClient.DefaultRequestHeaders.Add(name: LibraryConstants.ClientIPv4AddressHeaderName, clientIPv4Address);
 			HttpResponseMessage response = await httpClient.GetAsync("v1/verifications/initialize");
@@ -47,7 +47,7 @@ namespace VSCSharp.Clients
 
 			try
 			{
-				var result = JsonSerializer.Deserialize<Initialization>(content, JsonSerializerOptions);
+				var result = JsonSerializer.Deserialize<InitializeResponse>(content, JsonSerializerOptions);
 
 				if (result is null)
 				{

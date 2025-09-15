@@ -6,7 +6,7 @@ namespace VSCSharp.Models
 	/// <summary>
 	/// Represents the initialization response which contains the available verification methods.
 	/// </summary>
-	public record Initialization
+	public record InitializeResponse
 	{
 		/// <summary>
 		/// Gets the list of available methods for verification.
