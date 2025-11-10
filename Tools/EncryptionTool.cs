@@ -29,7 +29,7 @@ namespace VSCSharp.Tools
 		/// <exception cref="FailedDecryptingVerificationTokenException">
 		/// Thrown when the token cannot be decrypted due to an underlying cryptographic error.
 		/// </exception>
-		public static DecryptTokenResult VerifyVerificationToken(this string token, string serverKey)
+		public static DecryptTokenResult DecryptToken(this string token, string serverKey)
 		{
 			if (string.IsNullOrWhiteSpace(token))
 			{
