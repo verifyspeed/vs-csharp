@@ -37,13 +37,14 @@ namespace VSCSharp.Clients
 		{
 			httpClient.DefaultRequestHeaders.Add(name: LibraryConstants.ClientIPv4AddressHeaderName, clientIPv4Address);
 			HttpResponseMessage response = await httpClient.GetAsync("v1/verifications/initialize");
+			string content = await response.Content.ReadAsStringAsync();
 
 			if (!response.IsSuccessStatusCode)
 			{
-				throw new FailedInitializationException($"Failed to initialize, reason: {response.ReasonPhrase}");
+				throw new FailedInitializationException(
+					$"Failed to initialize, status code: {response.StatusCode}, reason: {response.ReasonPhrase}, content: {content}"
+				);
 			}
-
-			string content = await response.Content.ReadAsStringAsync();
 
 			try
 			{
@@ -51,7 +52,9 @@ namespace VSCSharp.Clients
 
 				if (result is null)
 				{
-					throw new FailedInitializationException(message: "response content is null");
+					throw new FailedInitializationException(
+						message: "Failed to deserialize the initialization response content"
+					);
 				}
 
 				return result;
@@ -86,14 +89,14 @@ namespace VSCSharp.Clients
 				)
 			);
 
+			string content = await response.Content.ReadAsStringAsync();
+
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new FailedCreateVerificationException(
-					$"Failed to create verification, reason: {response.ReasonPhrase}"
+					$"Failed to create verification, status code: {response.StatusCode}, reason: {response.ReasonPhrase}, content: {content}"
 				);
 			}
-
-			string content = await response.Content.ReadAsStringAsync();
 
 			try
 			{
@@ -121,12 +124,14 @@ namespace VSCSharp.Clients
 			httpClient.DefaultRequestHeaders.Add(name: "token", token);
 			HttpResponseMessage responseMessage = await httpClient.GetAsync("v1/verifications/result");
 
+			string content = await responseMessage.Content.ReadAsStringAsync();
+
 			if (!responseMessage.IsSuccessStatusCode)
 			{
-				throw new FailedVerifyingTokenException($"Failed to verify token, reason: {responseMessage.ReasonPhrase}");
+				throw new FailedVerifyingTokenException(
+					$"Failed to verify token, status code: {responseMessage.StatusCode}, reason: {responseMessage.ReasonPhrase}, content: {content}"
+				);
 			}
-
-			string content = await responseMessage.Content.ReadAsStringAsync();
 
 			try
 			{
