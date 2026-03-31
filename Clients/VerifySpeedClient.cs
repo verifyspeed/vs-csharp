@@ -11,7 +11,7 @@ using VSCSharp.Tools;
 namespace VSCSharp.Clients
 {
 	/// <inheritdoc/>
-	public class VerifySpeedClient : IVerifySpeedClient
+	internal class VerifySpeedClient : IVerifySpeedClient
 	{
 		private string ServerKey { get; }
 		private readonly HttpClient httpClient;
@@ -26,7 +26,7 @@ namespace VSCSharp.Clients
 		/// </summary>
 		/// <param name="httpClient">The HTTP client used for making API requests.</param>
 		/// <param name="serverKey"></param>
-		public VerifySpeedClient(HttpClient httpClient, string serverKey)
+		internal VerifySpeedClient(HttpClient httpClient, string serverKey)
 		{
 			ServerKey = serverKey;
 			this.httpClient = httpClient;
