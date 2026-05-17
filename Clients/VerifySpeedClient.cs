@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Net.Mime;
 using System.Text;
@@ -72,16 +73,25 @@ namespace VSCSharp.Clients
 		public async Task<CreatedVerificationResponse> CreateVerificationAsync(
 			string methodName,
 			string clientIPv4Address,
+			string? phoneNumber = null,
 			string? language = null
 		)
 		{
 			httpClient.DefaultRequestHeaders.Add(name: LibraryConstants.ClientIPv4AddressHeaderName, clientIPv4Address);
 
+			if (methodName.IsOtpType() && phoneNumber is null)
+			{
+				 throw new FailedCreateVerificationException("phoneNumber is required for OTP method types");
+			}
+			
 			HttpResponseMessage response = await httpClient.PostAsync(
 				requestUri: "v1/verifications/create",
 				new StringContent(
 					JsonSerializer.Serialize(
-						new { methodName = methodName, language = language },
+						new
+						{
+							methodName = methodName, language = language, phoneNumber = phoneNumber
+						},
 						JsonSerializerOptions
 					),
 					Encoding.UTF8,

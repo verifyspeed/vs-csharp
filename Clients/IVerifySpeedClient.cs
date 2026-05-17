@@ -23,12 +23,14 @@ namespace VSCSharp.Clients
 		/// </summary>
 		/// <param name="methodName">The method name to use for verification (e.g., "TelegramMessage", "WhatsAppMessage").</param>
 		/// <param name="clientIPv4Address">The client's IPv4 address to include in the request header.</param>
+		/// <param name="phoneNumber"></param>
 		/// <param name="language">The language to use for the verification process. Optional.</param>
 		/// <returns>A <see cref="CreatedVerificationResponse"/> object that represents the created verification.</returns>
 		/// <exception cref="FailedCreateVerificationException">Thrown when the verification creation fails.</exception>
 		Task<CreatedVerificationResponse> CreateVerificationAsync(
 			string methodName,
 			string clientIPv4Address,
+			string? phoneNumber = null,
 			string? language = null
 		);
 
