@@ -21,10 +21,10 @@ namespace VSCSharp.Clients
 		/// <summary>
 		/// Creates a verification.
 		/// </summary>
-		/// <param name="methodName">The method name to use for verification (e.g., "TelegramMessage", "WhatsAppMessage").</param>
+		/// <param name="methodName">The verification method identifier (e.g., "whatsapp-message", "whatsapp-otp").</param>
 		/// <param name="clientIPv4Address">The client's IPv4 address to include in the request header.</param>
-		/// <param name="phoneNumber"></param>
-		/// <param name="language">The language to use for the verification process. Optional.</param>
+		/// <param name="phoneNumber">The user's phone number in E.164 format (e.g., "+14255552673"). Required when <paramref name="methodName"/> is an OTP method ("whatsapp-otp", "telegram-otp", or "sms-otp"); VerifySpeed sends a one-time password to this number. Omit for message-based methods.</param>
+		/// <param name="language">The language to use for the verification process (e.g., "en", "ar", "ckb"). Optional; defaults to English.</param>
 		/// <returns>A <see cref="CreatedVerificationResponse"/> object that represents the created verification.</returns>
 		/// <exception cref="FailedCreateVerificationException">Thrown when the verification creation fails.</exception>
 		Task<CreatedVerificationResponse> CreateVerificationAsync(
