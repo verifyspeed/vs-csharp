@@ -79,10 +79,11 @@ namespace VSCSharp.Clients
 		{
 			httpClient.DefaultRequestHeaders.Add(name: LibraryConstants.ClientIPv4AddressHeaderName, clientIPv4Address);
 
-			if (methodName.IsOtpType() && phoneNumber is null)
-			{
-				 throw new FailedCreateVerificationException("phoneNumber is required for OTP method types");
-			}
+			// temporarily disable phone validation for OTP method types
+			// if (methodName.IsOtpType() && phoneNumber is null)
+			// {
+			// 	 throw new FailedCreateVerificationException("phoneNumber is required for OTP method types");
+			// }
 			
 			HttpResponseMessage response = await httpClient.PostAsync(
 				requestUri: "v1/verifications/create",
