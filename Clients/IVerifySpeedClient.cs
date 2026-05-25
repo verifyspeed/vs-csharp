@@ -35,6 +35,16 @@ namespace VSCSharp.Clients
 		);
 
 		/// <summary>
+		/// Validates an OTP code for a verification session created with an OTP method.
+		/// Call from your backend when the user's app sends the code to your server (not from client apps with an exposed server key).
+		/// </summary>
+		/// <param name="code">The OTP code entered by the user (max 5 characters).</param>
+		/// <param name="verificationKey">The verification key returned from <see cref="CreateVerificationAsync"/> for the same OTP session.</param>
+		/// <returns>A <see cref="ValidateOtpResponse"/> object. Check <see cref="ValidateOtpResponse.Succeed"/>; business failures (invalid code, expired OTP) return HTTP 200 with <c>succeed: false</c>.</returns>
+		/// <exception cref="FailedValidateOtpException">Thrown when the validate-otp HTTP request fails.</exception>
+		Task<ValidateOtpResponse> ValidateOtpAsync(string code, string verificationKey);
+
+		/// <summary>
 		/// Verify verification token on VerifySpeed API.
 		/// </summary>
 		/// <param name="token">The token to verify.</param>

@@ -130,6 +130,50 @@ namespace VSCSharp.Clients
 		}
 
 		/// <inheritdoc/>
+		public async Task<ValidateOtpResponse> ValidateOtpAsync(string code, string verificationKey)
+		{
+			HttpResponseMessage response = await httpClient.PostAsync(
+				requestUri: "v1/verifications/validate-otp",
+				new StringContent(
+					JsonSerializer.Serialize(
+						new { code = code, verificationKey = verificationKey },
+						JsonSerializerOptions
+					),
+					Encoding.UTF8,
+					MediaTypeNames.Application.Json
+				)
+			);
+
+			string content = await response.Content.ReadAsStringAsync();
+
+			if (!response.IsSuccessStatusCode)
+			{
+				throw new FailedValidateOtpException(
+					$"Failed to validate OTP, status code: {response.StatusCode}, reason: {response.ReasonPhrase}, content: {content}"
+				);
+			}
+
+			try
+			{
+				var result = JsonSerializer.Deserialize<ValidateOtpResponse>(content, JsonSerializerOptions);
+
+				if (result is null)
+				{
+					throw new FailedValidateOtpException(message: "response content is null");
+				}
+
+				return result;
+			}
+			catch (JsonException exception)
+			{
+				throw new FailedValidateOtpException(
+					message: "Failed to deserialize the validate OTP response content",
+					exception
+				);
+			}
+		}
+
+		/// <inheritdoc/>
 		public async Task<VerifyTokenResponse> VerifyTokenAsync(string token)
 		{
 			httpClient.DefaultRequestHeaders.Add(name: "token", token);

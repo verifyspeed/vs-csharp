@@ -163,6 +163,36 @@ public async Task InitializeVerificationAsync()
 }
 ```
 
+### Validate OTP (backend)
+
+After creating an OTP verification, validate the code on your server when the user's app sends it to your backend:
+
+```csharp
+public async Task<ValidateOtpResponse> ValidateOtpAsync(string code, string verificationKey)
+{
+    try
+    {
+        var result = await _verifySpeedClient.ValidateOtpAsync(code, verificationKey);
+
+        if (!result.Succeed)
+        {
+            // Handle OTP_EXPIRED, OTP_INVALID, OTP_ALREADY_VERIFIED via result.ErrorCode
+            Console.WriteLine($"OTP validation failed: {result.ErrorMessage} ({result.ErrorCode})");
+            return result;
+        }
+
+        // result.Token and result.PhoneNumber are set on success
+        var details = _verifySpeedClient.DecryptToken(result.Token!);
+        return result;
+    }
+    catch (FailedValidateOtpException ex)
+    {
+        Console.WriteLine($"Validate OTP request failed: {ex.Message}");
+        throw;
+    }
+}
+```
+
 ### Create Verification
 
 ```csharp
@@ -210,6 +240,11 @@ catch (FailedVerifyingTokenException ex)
 {
     // API verification failed
     Console.WriteLine($"Verification failed: {ex.Message}");
+}
+catch (FailedValidateOtpException ex)
+{
+    // validate-otp HTTP request failed
+    Console.WriteLine($"Validate OTP failed: {ex.Message}");
 }
 ```
 
