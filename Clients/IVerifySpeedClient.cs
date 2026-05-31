@@ -30,7 +30,7 @@ namespace VSCSharp.Clients
 		Task<CreatedVerificationResponse> CreateVerificationAsync(
 			string methodName,
 			string clientIPv4Address,
-			string? phoneNumber = null,
+			string? phoneNumber,
 			string? language = null
 		);
 

@@ -23,7 +23,7 @@ namespace VSCSharp.Tools
 		{
 			string value = methodName.ToLower();
 	
-			if ( value is MethodNames.SmsOtp or MethodNames.WhatsAppOtp or MethodNames.TelegramOtp)
+			if (value is MethodNames.SmsOtp or MethodNames.WhatsAppOtp or MethodNames.TelegramOtp)
 			{
 				return true;
 			}
